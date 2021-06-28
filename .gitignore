@@ -1,0 +1,5 @@
+.DS_Store
+
+.spyproject
+__pycache__
+figures/ephys_figures/*.npy
