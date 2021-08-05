@@ -514,13 +514,13 @@ class Figure:
             )
             plt.gca().add_patch(rect)
             plt.text(
-                0.04, -0.04, "10s ", fontsize=6, transform=plt.gca().transAxes,
+                0.04, -0.04, "10s ", fontsize=8, transform=plt.gca().transAxes,
             )
             plt.text(
                 -0.15,
                 0.05,
                 "500 %\n$\Delta$F/F (%)",
-                fontsize=6,
+                fontsize=8,
                 transform=plt.gca().transAxes,
             )
 
@@ -636,7 +636,7 @@ class Figure:
             self.snr_cell_pop_raw_all, self.snr_cell_pop_raw_all, "k--",
         )
 
-        plt.legend(frameon=False, prop={"size": 8})
+        plt.legend(frameon=False, prop={"size": 9})
         plt.xlabel("SNR\n of raw traces")
         plt.ylabel("SNR after\nDeepInterpolation")
         ax.set_ylim([0, 100])
@@ -772,7 +772,7 @@ class Figure:
         plt.ylabel("Response reliability to natural movie\nafter DeepInterpolation")
         plt.gca().spines["right"].set_visible(False)
         plt.gca().spines["top"].set_visible(False)
-        plt.legend(frameon=False, prop={"size": 8})
+        plt.legend(frameon=False, prop={"size": 9})
 
         non_nan_roi = np.logical_not(np.isnan(self.rel_cell_pop_di_all))
         print(
@@ -915,19 +915,19 @@ class Figure:
 
     def make_figure(self):
 
-        self.fig = plt.figure(figsize=(15, 20))
+        self.fig = plt.figure(figsize=(25, 19))
 
         ax = placeAxesOnGrid(
             self.fig,
-            dim=[3, 2],
-            xspan=[0.005, 0.445],
-            yspan=[0.005, 0.445],
+            dim=[2, 3],
+            xspan=[0.005, 0.35],
+            yspan=[0.005, 0.35],
             wspace=0.1,
             hspace=0.1,
         )
 
         for local_index, local_path in enumerate(self.list_path_segmentation_examples):
-            plt.sca(ax[local_index][0])
+            plt.sca(ax[0][local_index])
             if local_index == 0:
                 scale_bar = True
                 plt.text(
@@ -942,36 +942,36 @@ class Figure:
             else:
                 scale_bar = False
             self.plot_projection_img(
-                ax[local_index][0],
+                ax[0][local_index],
                 local_path,
                 rect_zoom=[0.25, 0.75, 0.25, 0.75],
                 scale_bar=scale_bar,
             )
 
         for local_index, local_path in enumerate(self.list_path_segmentation_examples):
-            plt.sca(ax[local_index][1])
+            plt.sca(ax[1][local_index])
             self.plot_projection_img(
-                ax[local_index][1],
+                ax[1][local_index],
                 local_path,
                 zoom=[0.25, 0.75, 0.25, 0.75],
                 rect_zoom=[0, 1, 0, 1],
             )
 
-        ax = placeAxesOnGrid(self.fig, xspan=[0.55, 0.75], yspan=[0.45, 0.60])
+        ax = placeAxesOnGrid(self.fig, xspan=[0.40, 0.6], yspan=[0.38, 0.58])
         plt.text(
-            -0.3, 0.9, "D", fontsize=20, weight="bold", transform=ax.transAxes,
+            0, 1.1, "D", fontsize=20, weight="bold", transform=ax.transAxes,
         )
 
         self.plot_snr_densities(ax)
 
-        ax = placeAxesOnGrid(self.fig, xspan=[0.85, 0.98], yspan=[0.45, 0.60])
+        ax = placeAxesOnGrid(self.fig, xspan=[0.65, 0.75], yspan=[0.38, 0.58])
         self.plot_nb_roi_threshold(ax)
 
         ax = placeAxesOnGrid(
             self.fig,
             dim=[3, 2],
-            xspan=[0.025, 0.45],
-            yspan=[0.475, 0.825],
+            xspan=[0.025, 0.35],
+            yspan=[0.37, 0.825],
             wspace=0.1,
             hspace=0.2,
         )
@@ -1016,9 +1016,11 @@ class Figure:
                 plt.title("vertical dendrites/axons")
 
         ax = placeAxesOnGrid(
-            self.fig, dim=[4, 3], xspan=[0.525, 0.975], yspan=[0.025, 0.445]
+            self.fig, dim=[2, 6], xspan=[0.385, 0.975], yspan=[0.025, 0.35]
         )
         index_row = -1
+        offset_column = -1
+
         for index_local, local_folder in enumerate(
             os.listdir(self.path_to_rois_example_folder)
         ):
@@ -1027,10 +1029,19 @@ class Figure:
                 list_files = os.listdir(
                     os.path.join(self.path_to_rois_example_folder, local_folder)
                 )
-                index_column = -1
+                # We reset row if we reach the bottom
+                if index_row == 2:
+                    index_row = 0
+                    offset_column = 2
+                
+                index_column = offset_column                
+
                 for index_file, local_file in enumerate(list_files):
                     if not ("DS_Store" in local_file):
-                        index_column += 1
+                        index_column += 1       
+                                 
+                        print(index_row, index_column)
+
                         plt.sca(ax[index_row][index_column])
                         if index_row == 0 and index_column == 0:
                             plt.text(
@@ -1042,18 +1053,18 @@ class Figure:
                                 transform=ax[index_row][index_column].transAxes,
                             )
 
-                        if index_row == 0 and index_column == 1:
+                        if index_row == 0 and index_column == 2:
                             plt.text(
-                                -0.6,
+                                0,
                                 1.2,
                                 "Automatically segmented filters",
                                 fontsize=15,
                                 transform=ax[index_row][index_column].transAxes,
                             )
 
-                        if index_column == 1:
+                        if index_column == 1 or index_column == 4:
                             plt.title(local_folder)
-                        if index_column == 0 and index_row == 3:
+                        if index_column == 0 and index_row == 1:
                             scale_bar = True
                         else:
                             scale_bar = False
@@ -1068,16 +1079,16 @@ class Figure:
                             scale_bar=scale_bar,
                         )
 
-        ax = placeAxesOnGrid(self.fig, dim=[1, 1], xspan=[0.6, 0.9], yspan=[0.65, 0.8])
+        ax = placeAxesOnGrid(self.fig, dim=[1, 1], xspan=[0.8, 0.95], yspan=[0.38, 0.58])
 
         plt.text(
-            -0.32, 1, "E", fontsize=20, weight="bold", transform=ax.transAxes,
+            -0.32, 1.1, "E", fontsize=20, weight="bold", transform=ax.transAxes,
         )
 
         self.plot_reliability_comparison()
 
         ax = placeAxesOnGrid(
-            self.fig, dim=[1, 2], xspan=[0.05, 0.5], yspan=[0.85, 0.97]
+            self.fig, dim=[1, 2], xspan=[0.40, 0.65], yspan=[0.65, 0.825]
         )
         plt.text(
             -0.1, 0.95, "F", fontsize=20, weight="bold", transform=ax[0].transAxes,
@@ -1104,17 +1115,17 @@ class Figure:
         self.plot_hist_overlaid(noise_corr_raw, noise_corr_den)
         plt.xlabel("noise correlation")
 
-        plt.legend(frameon=False, prop={"size": 8})
+        plt.legend(frameon=False, prop={"size": 9})
 
-        ax = placeAxesOnGrid(self.fig, dim=[1, 2], xspan=[0.55, 0.95], yspan=[0.88, 1])
+        ax = placeAxesOnGrid(self.fig, dim=[1, 2], xspan=[0.7, 0.95], yspan=[0.65, 0.825])
         plt.sca(ax[0])
         plt.text(
-            -0.4, 1.15, "G", fontsize=20, weight="bold", transform=ax[0].transAxes,
+            -0.4, 1.0, "G", fontsize=20, weight="bold", transform=ax[0].transAxes,
         )
 
         plt.text(
-            0.05,
-            1.2,
+            0.15,
+            1.15,
             "Distribution of strong pairwise noise correction (> 0.4)",
             fontsize=10,
             transform=ax[0].transAxes,
