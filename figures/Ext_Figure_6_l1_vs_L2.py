@@ -255,7 +255,7 @@ if __name__ == "__main__":
     output_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         "pdfs",
-        "Supp Figure 11 - L1 vs L2.pdf",
+        "Ext Figure 6 - L1 vs L2.pdf",
     )
     if os.path.isfile(output_file):
         os.remove(output_file)

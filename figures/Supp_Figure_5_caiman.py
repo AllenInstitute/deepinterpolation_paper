@@ -320,7 +320,7 @@ if __name__ == "__main__":
     output_file = os.path.join(
         os.path.dirname(os.path.abspath(__file__)),
         "pdfs",
-        "Supp Figure 8 - Caiman.pdf",
+        "Supp Figure 5 - Caiman.pdf",
     )
 
     if os.path.isfile(output_file):
