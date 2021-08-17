@@ -12,6 +12,11 @@ from matplotlib.patches import Rectangle
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
       
+matplotlib.rcParams.update({"font.size": 8})
+
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
 
 class Figure:
     def __init__(self, output_file):

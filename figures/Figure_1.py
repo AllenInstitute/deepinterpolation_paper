@@ -15,6 +15,9 @@ import scipy.stats
 matplotlib.use("TkAgg")
 matplotlib.rcParams.update({"font.size": 8})
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
 
 class Figure:
     def __init__(self, output_file):
@@ -28,13 +31,16 @@ class Figure:
         )
         self.list_example = []
         self.list_example.append(
-            r"/Users/jeromel/Documents/Work documents/Allen Institute/Projects/Deep2P/Publication/repos/deep_interpolation_paper/data/validation_out_2019_09_11_23_32_unet_single_1024_mean_absolute_error_Ai93-0000-raw-example.png"
+            os.path.join(
+            local_path, "../data/validation_out_2019_09_11_23_32_unet_single_1024_mean_absolute_error_Ai93-0000-raw-example.png")
         )
         self.list_example.append(
-            r"/Users/jeromel/Documents/Work documents/Allen Institute/Projects/Deep2P/Publication/repos/deep_interpolation_paper/data/validation_out_2019_09_11_23_32_unet_single_1024_mean_absolute_error_Ai93-0025-example.png"
+            os.path.join(
+            local_path, "../data/validation_out_2019_09_11_23_32_unet_single_1024_mean_absolute_error_Ai93-0025-example.png")
         )
         self.list_example.append(
-            r"/Users/jeromel/Documents/Work documents/Allen Institute/Projects/Deep2P/Publication/repos/deep_interpolation_paper/data/validation_out_2019_09_11_23_32_unet_single_1024_mean_absolute_error_Ai93-0450-example.png"
+            os.path.join(
+            local_path, "../data/validation_out_2019_09_11_23_32_unet_single_1024_mean_absolute_error_Ai93-0450-example.png")
         )
         self.denoise_example = os.path.join(
             local_path, "../data/local_large_data/comp_505811062.h5"

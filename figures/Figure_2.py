@@ -18,6 +18,11 @@ from allensdk.core.brain_observatory_cache import BrainObservatoryCache
 import scipy.stats.stats as stats
 from scipy.stats import mode
 
+matplotlib.rcParams.update({"font.size": 8})
+
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
 
 class LocalAnalysisSNR:
     def __init__(self, path_to_raw_h5, exp_id, suite2p_folder="plane0"):

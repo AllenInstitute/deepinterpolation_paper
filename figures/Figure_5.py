@@ -15,6 +15,10 @@ import nibabel as nib
 import time
 import scipy
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
+
 
 class Figure:
     def __init__(self, output_file):
@@ -57,7 +61,7 @@ class Figure:
     def load_data(self):
         self.get_loss_curves()
         self.get_fmri_volumes()
-        self.get_roi_data()
+        # self.get_roi_data()
 
     def get_roi_data(self):
         list_roi = os.listdir(self.path_to_roi_folder)

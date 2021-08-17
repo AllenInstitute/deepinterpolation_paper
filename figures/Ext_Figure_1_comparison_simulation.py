@@ -14,6 +14,10 @@ from scipy.stats import sem
 import scipy.signal as signal
 from PIL import Image
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
+
 class Figure:
     def __init__(self, output_file):
         self.output_file = output_file
