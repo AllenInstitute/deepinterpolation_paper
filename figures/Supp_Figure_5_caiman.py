@@ -1,5 +1,3 @@
-import caiman
-from caiman.source_extraction.cnmf import cnmf as cnmf
 import matplotlib.pylab as plt
 import numpy as np
 import os
@@ -9,9 +7,15 @@ import h5py
 import cv2
 import matplotlib
 
+import caiman
+from caiman.source_extraction.cnmf import cnmf as cnmf
+
 from matplotlib import rc
+import matplotlib as mpl
+mpl.rcParams.update(mpl.rcParamsDefault)
 rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
 matplotlib.rcParams['pdf.fonttype'] = 42
+
 
 class Figure:
     def __init__(self, output_file):
@@ -209,7 +213,7 @@ class Figure:
 
     def make_figure(self):
 
-        self.fig = plt.figure(figsize=(10, 20))
+        self.fig = plt.figure(figsize=(10, 10))
 
         ax = placeAxesOnGrid(
             self.fig, dim=[1, 2], xspan=[0.15, 0.85], yspan=[0.05, 0.35]

@@ -8,6 +8,7 @@ import cv2
 import matplotlib
 
 from matplotlib import rc
+
 rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
 matplotlib.rcParams['pdf.fonttype'] = 42
 
