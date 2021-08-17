@@ -16,7 +16,7 @@ import time
 import scipy
 
 from matplotlib import rc
-rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+rc('font', **{'family': 'sans-serif', 'sans-serif': ['Arial']})
 matplotlib.rcParams['pdf.fonttype'] = 42
 
 
@@ -56,7 +56,8 @@ class Figure:
         )
         local_path = pathlib.Path(__file__).parent.absolute()
 
-        self.path_schematic = os.path.join(local_path, "Figure_5 - top_panel.png")
+        self.path_schematic = os.path.join(
+            local_path, "Figure_5 - top_panel.png")
 
     def load_data(self):
         self.get_loss_curves()
@@ -69,10 +70,12 @@ class Figure:
         self.dict_roi = {}
         for each_roi in list_roi:
             if ".nii" in each_roi:
-                local_roi_file = os.path.join(self.path_to_roi_folder, each_roi)
+                local_roi_file = os.path.join(
+                    self.path_to_roi_folder, each_roi)
                 nib.load(local_roi_file)
                 roi_volume = (
-                    nib.load(local_roi_file).get_fdata()[:, :, :].astype("float")
+                    nib.load(local_roi_file).get_fdata()[
+                        :, :, :].astype("float")
                 )
 
                 self.dict_roi[each_roi] = roi_volume
@@ -105,7 +108,8 @@ class Figure:
         batch_size = 1000
         step_per_epoch = 6000
         exponent = 1000000
-        x_axis = batch_size * step_per_epoch * np.arange(0, self.val_loss.shape[0])
+        x_axis = batch_size * step_per_epoch * \
+            np.arange(0, self.val_loss.shape[0])
         plt.plot(x_axis / exponent, self.val_loss)
         plt.xlabel("Number of unique samples (millions)")
         plt.ylabel("Validation loss")
@@ -151,17 +155,20 @@ class Figure:
             self.fig, dim=[1, 1], xspan=[0.05, 0.65], yspan=[0.002, 0.35]
         )
 
-        plt.text(-0.05, 0.9, "A", fontsize=20, weight="bold", transform=ax.transAxes)
+        plt.text(-0.05, 0.9, "A", fontsize=20,
+                 weight="bold", transform=ax.transAxes)
 
         self.plot_schematic_fmri(ax)
 
-        ax = placeAxesOnGrid(self.fig, dim=[1, 1], xspan=[0.7, 0.95], yspan=[0.1, 0.26])
+        ax = placeAxesOnGrid(self.fig, dim=[1, 1], xspan=[
+                             0.7, 0.95], yspan=[0.1, 0.26])
 
         plt.sca(ax)
         # self.plot_val_loss()
         self.plot_snr_before_after()
 
-        plt.text(-0.1, 0.95, "B", fontsize=20, weight="bold", transform=ax.transAxes)
+        plt.text(-0.1, 0.95, "B", fontsize=20,
+                 weight="bold", transform=ax.transAxes)
 
         ax = placeAxesOnGrid(
             self.fig, dim=[2, 4], xspan=[0.005, 0.995], yspan=[0.33, 0.6]
@@ -176,7 +183,8 @@ class Figure:
         )
 
         plt.sca(ax[0][0])
-        plt.imshow(self.raw_brain_data[:, 20, ::-1, 20].T, cmap="gray", clim=[0, 1831])
+        plt.imshow(self.raw_brain_data[:, 20, ::-1,
+                                       20].T, cmap="gray", clim=[0, 1831])
         plt.axis("off")
         plt.title("Raw")
 
@@ -201,7 +209,8 @@ class Figure:
         )
 
         plt.sca(ax[1][0])
-        plt.imshow(self.raw_brain_data[35, :, ::-1, 20].T, cmap="gray", clim=[0, 1831])
+        plt.imshow(self.raw_brain_data[35, :, ::-1,
+                                       20].T, cmap="gray", clim=[0, 1831])
         plt.axis("off")
         local_shape_raw = self.raw_brain_data.shape
         rectangle_length = 50 * 1.0 / 3
@@ -280,7 +289,8 @@ class Figure:
         return rois_average, average_activity
 
     def plot_roi_raw_den(self):
-        [rois_average, average_activity] = self.get_rois_averages(self.raw_brain_data)
+        [rois_average, average_activity] = self.get_rois_averages(
+            self.raw_brain_data)
         index_x = np.arange(average_activity.shape[0]) * 1 / 3
 
         for index, local_roi_key in enumerate(self.dict_roi):
@@ -291,7 +301,8 @@ class Figure:
                 color="k",
             )
 
-        [rois_average, average_activity] = self.get_rois_averages(self.den_brain_data)
+        [rois_average, average_activity] = self.get_rois_averages(
+            self.den_brain_data)
 
         for index, local_roi_key in enumerate(self.dict_roi):
             plt.plot(
@@ -373,8 +384,10 @@ class Figure:
             list_std_back_den.append(np.std(local_trace_back_den))
             list_std_head_den.append(np.std(local_trace_head_den))
 
-            list_std_back_res.append(np.std(local_trace_back - local_trace_back_den))
-            list_std_head_res.append(np.std(local_trace_head - local_trace_head_den))
+            list_std_back_res.append(
+                np.std(local_trace_back - local_trace_back_den))
+            list_std_head_res.append(
+                np.std(local_trace_head - local_trace_head_den))
 
         print(
             f"background std raw = {np.mean(list_std_back_raw)} +/- {scipy.stats.sem(list_std_back_raw)}, N = {len(list_std_back_raw)}"
@@ -411,10 +424,10 @@ class Figure:
             z_in = np.random.randint(50)
 
             local_trace_raw = local_figure.raw_brain_data[
-                x_in, y_in, z_in, edge + edge_off : -edge + edge_off
+                x_in, y_in, z_in, edge + edge_off: -edge + edge_off
             ]
             local_trace_den = local_figure.den_brain_data[
-                x_in, y_in, z_in, edge + edge_off : -edge + edge_off
+                x_in, y_in, z_in, edge + edge_off: -edge + edge_off
             ]
 
             local_mean_raw = np.mean(local_trace_raw)
@@ -474,10 +487,10 @@ class Figure:
             z_in = np.random.randint(50)
 
             local_trace_raw = local_figure.raw_brain_data[
-                x_in, y_in, z_in, edge + edge_off : -edge + edge_off
+                x_in, y_in, z_in, edge + edge_off: -edge + edge_off
             ]
             local_trace_den = local_figure.den_brain_data[
-                x_in, y_in, z_in, edge + edge_off : -edge + edge_off
+                x_in, y_in, z_in, edge + edge_off: -edge + edge_off
             ]
 
             local_mean_raw = np.mean(local_trace_raw)
@@ -497,16 +510,20 @@ class Figure:
             except:
                 print("Invalid voxel value")
         bins_on = np.arange(0, 250)
-        [snr_den_bins, final_bins] = np.histogram(np.array(list_snr_den), bins=bins_on)
-        [snr_raw_bins, final_bins] = np.histogram(np.array(list_snr_raw), bins=bins_on)
+        [snr_den_bins, final_bins] = np.histogram(
+            np.array(list_snr_den), bins=bins_on)
+        [snr_raw_bins, final_bins] = np.histogram(
+            np.array(list_snr_raw), bins=bins_on)
 
         plt.plot(snr_raw_bins, "#4A484A", label="Raw")
         plt.fill_between(
-            bins_on[:-1], snr_raw_bins, color=(209 / 255.0, 209 / 255.0, 209 / 255.0)
+            bins_on[:-1], snr_raw_bins, color=(209 /
+                                               255.0, 209 / 255.0, 209 / 255.0)
         )
         plt.plot(snr_den_bins, "#8A181A", label="DeepInterpolation")
         plt.fill_between(
-            bins_on[:-1], snr_den_bins, color=(231 / 255.0, 209 / 255.0, 210 / 255.0)
+            bins_on[:-1], snr_den_bins, color=(231 /
+                                               255.0, 209 / 255.0, 210 / 255.0)
         )
 
         plt.xlabel("tSNR")
@@ -562,10 +579,12 @@ class Figure:
             index_x = np.arange(local_trace_raw.shape[0]) * 1 / 3
             local_ave = np.mean(local_trace_raw)
             plt.plot(
-                index_x, 100 * (local_trace_raw - local_ave) / local_ave, "#4A484A"
+                index_x, 100 * (local_trace_raw - local_ave) /
+                local_ave, "#4A484A"
             )
             plt.plot(
-                index_x, 100 * (local_trace_den - local_ave) / local_ave, "#8A181A"
+                index_x, 100 * (local_trace_den - local_ave) /
+                local_ave, "#8A181A"
             )
             plt.gca().spines["right"].set_visible(False)
             plt.gca().spines["top"].set_visible(False)
@@ -600,4 +619,3 @@ if __name__ == "__main__":
     local_figure.make_figure()
     local_figure.save_figure()
     local_figure.get_test_snr_before_after()
-
