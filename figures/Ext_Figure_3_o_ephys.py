@@ -22,6 +22,9 @@ from scipy.interpolate import interp1d
 from mpl_toolkits.axes_grid.inset_locator import (inset_axes, InsetPosition,
                                                   mark_inset)
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
 
 class Figure:
     def __init__(self, output_file):

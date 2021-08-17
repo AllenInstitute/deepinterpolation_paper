@@ -10,6 +10,9 @@ import os
 import matplotlib
 from scripts.plotting_helpers import placeAxesOnGrid
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
 
 class Figure:
     def __init__(self, output_file):

@@ -11,6 +11,9 @@ from pyitlib import discrete_random_variable as drv
 import pathlib
 import random
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
 
 class Figure:
     def __init__(self, output_file):
@@ -282,7 +285,7 @@ class Figure:
         for index, indiv_id in enumerate(self.list_movies):
             [raw_sample, denoised_sample] = self.list_movies_data[indiv_id]
             list_pixel = np.random.randint(0, 512 * 512, size=10000)
-            local_corr_raw = self.get_corr(raw_sample, c)
+            local_corr_raw = self.get_corr(raw_sample, list_pixel)
             local_corr_den = self.get_corr(denoised_sample, list_pixel)
 
             if index == 0:

@@ -8,6 +8,9 @@ from scipy.stats import mode
 import scipy
 import pathlib
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
 
 class Analyze_corr:
     def __init__(self, lims_id, stim):

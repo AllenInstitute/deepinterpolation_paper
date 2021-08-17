@@ -17,6 +17,10 @@ from scipy.signal import find_peaks
 from scipy.stats import gaussian_kde
 from scipy.ndimage import gaussian_filter1d
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
+
 class Figure:
     def __init__(self, output_file):
         self.output_file = output_file

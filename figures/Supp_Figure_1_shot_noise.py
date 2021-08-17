@@ -8,6 +8,10 @@ from scripts.plotting_helpers import placeAxesOnGrid
 from sklearn.linear_model import LinearRegression
 from matplotlib.patches import Rectangle
 
+from matplotlib import rc
+rc('font',**{'family':'sans-serif','sans-serif':['Arial']})
+matplotlib.rcParams['pdf.fonttype'] = 42
+
 class Qc2p():
     """QC class for 2p movies
     Objects contain methods to generate QC metrics from physio movies 
