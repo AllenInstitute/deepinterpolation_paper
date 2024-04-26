@@ -5,12 +5,12 @@ this folder will be synced manually between computers
 
 To get access those files, use the following download links : 
 ephys data : 
-https://www.dropbox.com/sh/uls0ts6bbi5l7gl/AAAyubqXjkazrg7rxXbbKTBYa?dl=0
+https://alleninstitute.sharepoint.com/:f:/s/ExternalSharing/EhCRF7qU2LJKrwfsMs0QMccBGTRFt1r2lQrR9XtZeXZtBg?e=0S0W7b
 
 two photon data :
-https://www.dropbox.com/sh/lznou2xm918ylwh/AACqxY67z2N1xPwVzq2_04AXa?dl=0
+https://alleninstitute.sharepoint.com/:f:/s/ExternalSharing/El0UGwhlvRhBlftqPn_2KdYB_LzBrxoLKyMfV4M5OMd_VA?e=PzmcIr
 
 fmri data : 
-https://www.dropbox.com/sh/e9eytkq5vjmqgse/AABQR5w-YtNyTl4bqld2olqMa?dl=0
+https://alleninstitute.sharepoint.com/:f:/s/ExternalSharing/EiLuoP3vydlKocBsdan4Xj4BqBcXt9V7LgvT_a2AZ36_Ag?e=a7gNfR
 
 Make sure to have enough room on your drive as those are 10-50 GB depending on what you download. 
